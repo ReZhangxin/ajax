@@ -39,7 +39,9 @@ if (ajaxObj.readState === 4 && ajaxObj.status === 200) {
     // 如果能进入这个判断，说明数据完美回来了，并且请求的页面是存在的
     // 5.在注册的事件中获取返回的内容并修改页面显示
   console.log('调用了...')
-  }
+    // 数据是保存在异步对象的属性中
+    console.log(ajaxObj.responseText)
+  }
 }
 ```
 

@@ -56,10 +56,10 @@ ajax.open('get', 'index.php?name='+username)
 // 第三步：发送请求
 ajax.send()
 // 第四步：注册事件
-document.querySelector('#submit').onclick = function () {
+ajax.onreadystatechange = function () {
  if (ajax.readyState === 4 && ajax.status === 200) {
-  // 第五步：在注册事件中获取返回的内容并修改页面显示
-  console.log(ajax.responseText)
+ // 第五步：在注册事件中获取返回的内容并修改页面显示
+   document.getElementById('box').innerHTML=ajax.responseText
  }
 }
 ```
@@ -82,10 +82,10 @@ ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
 // 第四步：发送请求(携带参数)
 ajax.send('name=xin&&age=22')
 // 第五步：注册事件
-document.querySelector('#submit').onclick = function () {
+ajax.onreadystatechange = function () {
  if (ajax.readyState === 4 && ajax.status === 200) {
-  // 第六步：在注册事件中获取返回的内容并修改页面显示
-  console.log(ajax.responseText)
+// 第六步：在注册事件中获取返回的内容并修改页面显示
+   document.getElementById('box').innerHTML=ajax.responseText
  }
 }
 ```

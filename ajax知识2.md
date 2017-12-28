@@ -99,5 +99,76 @@ ajax.onreadystatechange = function () {
  echo $_POST['age'].'你这么大了';
 ```
 
+## 举个栗子：切换头像
+
+### 浏览器
+
+1、xxx.html
+
+2、点击事件发送ajax请求
+
+3、请求方法： post
+
+4、步骤：
+
+- 获取异步对象
+- 设置url
+- 发送请求
+- 设置HTTP头
+- 注册事件
+- 在注册事件中修改页面（1、找到DOM元素；2、修改头像url）
+
+```js
+//  <div class="imgBox"></div>
+//  <input type="button" class='starBtn' value='xin'> 
+//  <input type="button" class='starBtn' value='fei'> 
+//  <input type="button" class='starBtn' value='suo'>
+var starBtns = document.querySelectorAll('.starBtn')
+for (var i = 0; i < starBtns.length; i++) {
+  starBtns[i].onclick = function () {
+    var ajax = new XMLHttpRequest()
+    ajax.open('post','index.php')
+    ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+    ajax.send('name' + this.value)
+    ajax.onreadystatechange = function () {
+      if (ajax.readyState === 4 && ajax.status === 200) {
+
+      }
+    }
+  }
+}
+```
+
+### 服务器
+
+1、xxx.php
+
+2、`$_POST`获取数据
+
+- 获取到的xin
+- 返回的是image/xin.jpg
+
+3、php逻辑
+
+- 准备关系型数组
+- `$_POST`获取`key`
+- 使用`key`获取对应的`value`
+- 返回`value`给浏览器
+
+```php
+  // 获取POST数据
+ $key = $_POST['name'];
+
+ $starArr = array(
+   'xin' =>,
+   'fei' =>,
+   'suo' =>
+ )
+
+```
+
+
+
+
 
 

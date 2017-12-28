@@ -45,3 +45,33 @@ if (ajaxObj.readState === 4 && ajaxObj.status === 200) {
 }
 ```
 
+## Ajax向后台传值
+
+```js
+// 第一步：获取异步对象
+var ajax = new XMLHttpRequest()
+var username = document.querySelector('#nameText').value
+// 第二步：设置请求url等参数
+ajax.open('get', 'index.php?name='+username)
+// 第三步：发送请求
+ajax.send()
+// 第四步：注册事件
+document.querySelector('#submit').onclick = function () {
+ if (ajax.readyState === 4 && ajax.status === 200) {
+  // 第五步：再注册事件中获取返回的内容并修改页面显示
+  console.log(ajax.responseText)
+ }
+}
+```
+
+后台接收参数并返回数据
+
+```php
+echo $_GET['name'].'你好啊~';
+```
+
+
+
+
+
+

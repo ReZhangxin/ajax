@@ -58,7 +58,7 @@ ajax.send()
 // 第四步：注册事件
 document.querySelector('#submit').onclick = function () {
  if (ajax.readyState === 4 && ajax.status === 200) {
-  // 第五步：再注册事件中获取返回的内容并修改页面显示
+  // 第五步：在注册事件中获取返回的内容并修改页面显示
   console.log(ajax.responseText)
  }
 }
@@ -70,8 +70,34 @@ document.querySelector('#submit').onclick = function () {
 echo $_GET['name'].'你好啊~';
 ```
 
+## Ajax发送POST请求
 
+```js
+// 第一步：创建异步对象
+var ajax = new XMLHttpRequest()
+// 第二步：设置url
+ajax.open('post', 'index.php')
+// 第三步：设置HTTP头
+ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+// 第四步：发送请求(携带参数)
+ajax.send('name=xin&&age=22')
+// 第五步：注册事件
+document.querySelector('#submit').onclick = function () {
+ if (ajax.readyState === 4 && ajax.status === 200) {
+  // 第六步：在注册事件中获取返回的内容并修改页面显示
+  console.log(ajax.responseText)
+ }
+}
+```
 
+后台接收数据
+
+```php
+  // 获取POST数据
+ echo $_POST['name'].'你好';
+ echo '<br>';
+ echo $_POST['age'].'你这么大了';
+```
 
 
 

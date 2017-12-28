@@ -10,7 +10,7 @@ php
 - array('key' => 'fade') arr['key']
 - 执行位置：服务端
 
-发送Ajax请求需要五步
+## 发送Ajax get请求需要五步
 
 1.创建异步对象
 

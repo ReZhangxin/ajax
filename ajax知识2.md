@@ -168,8 +168,24 @@ for (var i = 0; i < starBtns.length; i++) {
 
 ```
 
+## XML
 
+- XML 的设计宗旨是传输数据，而不是显示数据。
+- 是按照某种既定的格式写的字符串
+- 通通使用双标签
+- 最外层需要一个根节点
+- 标签的名字可以随便编写（不要使用数字开头，不要使用中文）
+- 如果写了版本号那么版本就要作为第一行否则会报错
+- 如果使用php读取，那么要设置header
 
+异步对象中有另外一个属性 用来专门获取xml
 
+xml对象在浏览器端就是一个document对象
+
+解析时可以直接使用querySelector获取
+
+```js
+console.log(ajax.responseXML.querySelector('name').innerHTML)
+```
 
 

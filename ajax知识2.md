@@ -132,8 +132,9 @@ for (var i = 0; i < starBtns.length; i++) {
     ajax.send('name' + this.value)
     ajax.onreadystatechange = function () {
       if (ajax.readyState === 4 && ajax.status === 200) {
-
-      }
+        // 修改页面显示
+        document.querySelector('.imgBox').style.background = 'url('+ajax.responseText+') no-repeat center'
+      }
     }
   }
 }
@@ -160,9 +161,9 @@ for (var i = 0; i < starBtns.length; i++) {
  $key = $_POST['name'];
 
  $starArr = array(
-   'xin' =>,
-   'fei' =>,
-   'suo' =>
+   'xin' => 'image/xin.jpg',
+   'fei' => 'image/fei.jpg',
+   'suo' => 'image/suo.jpg'
  )
 
 ```

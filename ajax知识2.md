@@ -120,8 +120,8 @@ ajax.onreadystatechange = function () {
 
 ```js
 //  <div class="imgBox"></div>
-//  <input type="button" class='starBtn' value='xin'> 
-//  <input type="button" class='starBtn' value='fei'> 
+//  <input type="button" class='starBtn' value='xin'>
+//  <input type="button" class='starBtn' value='fei'>
 //  <input type="button" class='starBtn' value='suo'>
 var starBtns = document.querySelectorAll('.starBtn')
 for (var i = 0; i < starBtns.length; i++) {
@@ -188,4 +188,66 @@ xml对象在浏览器端就是一个document对象
 console.log(ajax.responseXML.querySelector('name').innerHTML)
 ```
 
+## 封装Ajax工具函数
 
+```js
+function ajax (option) {
+  var ajax = new XMLHttpRequest()
+  // 格式化传入的数据为name=fox&age=18这样的格式
+  var data = "";
+  for(var item in option.data){
+      // 获取属性名,属性值,进行拼接
+      data+=item;// 属性名
+      data+="=";//等号
+      data+=option.data[item];//属性值
+      data+="&";//分隔符
+  }
+  // 去除最后一个&
+  data = data.slice(0,-1);
+  if (option.methods === 'get') {
+    if (data) {
+      ajax.open(option.methods, option.url+'?'+data)
+    } else {
+      ajax.open(option.methods, option.url)
+    }
+    ajax.send()
+  } else if (option.methods === 'post') {
+    ajax.open(option.methods,option.url)
+    ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    if (data) {ajax.send(data)
+    } else {
+      ajax.send()
+    }
+  }
+  ajax.onreadystatechange = function () {
+    if (ajax.readyState==4&&ajax.status==200) {
+      option.success(ajax.responseText);
+    }
+  }
+}
+```
+
+举个栗子：
+
+> js
+
+```js
+document.getElementById('send').onclick = function () {
+  ajax({
+    url: 'index.php',
+    data:{user:'Railgun',age:22,},
+    methods: 'get',
+    success: function (data) {
+      alert(data)
+    }
+  })
+}
+```
+
+> php
+
+```php
+$name = $_GET['user'];
+$age = $_GET['age'];
+echo 'Hello~'.$name.'，你今年'.$age.'岁了~';
+```
